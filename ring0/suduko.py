@@ -1,5 +1,6 @@
 from itertools import *
 from copy import *
+from pwn import *
 
 
 def parse_suduko(s):
@@ -45,13 +46,19 @@ def solve(board):
             board[row][col] = c
             b = solve(board)
             if b:
-                print ','.join([str(x) for x in chain.from_iterable(b)])
-                exit(1)
+                return b
             board[row][col] = old
         else:
             return False
     else:
-        return board
+        return ','.join([str(x) for x in chain.from_iterable(board)])
 
-board = parse_suduko(open('suduko.txt').read())
+server = ssh("sudoku", "ringzer0team.com", 12643, "dg43zz6R0E")
+sh = server.shell()
+input = sh.recvuntil('Solution:')
+# board = parse_suduko(open('suduko.txt').read())
+board = parse_suduko(input)
 s = solve(board)
+sh.sendline(s)
+sh.recvuntil('FLAG-')
+print 'FLAG-%s' % sh.recvline().strip()
