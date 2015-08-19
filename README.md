@@ -9,3 +9,9 @@ Playing some CTF
 
 ##### libraries
 * https://github.com/Gallopsled/pwntools
+
+##### ctf/wargames
+http://overthewire.org/wargames/
+http://smashthestack.org/
+https://exploit-exercises.com/
+https://microcorruption.com/
