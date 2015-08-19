@@ -11,7 +11,7 @@ Playing some CTF
 * https://github.com/Gallopsled/pwntools
 
 ##### ctf/wargames
-http://overthewire.org/wargames/
-http://smashthestack.org/
-https://exploit-exercises.com/
-https://microcorruption.com/
+* http://overthewire.org/wargames/
+* http://smashthestack.org/
+* https://exploit-exercises.com/
+* https://microcorruption.com/
