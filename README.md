@@ -5,7 +5,7 @@ Playing some CTF
 * http://crypo.ru/
 * http://imgops.com/
 * http://hashkiller.co.uk/
-
+* https://github.com/0xd4d/dnSpy
 
 ##### libraries
 * https://github.com/Gallopsled/pwntools
